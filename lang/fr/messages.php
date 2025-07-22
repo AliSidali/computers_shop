@@ -7,6 +7,10 @@ return [
     'password' => 'mot de passe',
     'remember_me' => 'se souvenir de moi',
     'forgotten_pw' => 'mot de passe oublié',
-    'register' => 'créer un compte'
+    'register' => 'créer un compte',
+
+    //navbar
+    'language' => 'langue',
+
 
 ];

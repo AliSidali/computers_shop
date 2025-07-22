@@ -9,4 +9,7 @@ return [
     'forgotten_pw' => 'نسيت كلمة المرور',
     'register' => 'انشاء حساب',
 
+    //navbar
+    'language' => 'اللغة'
+
 ];
