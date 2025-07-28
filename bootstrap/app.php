@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\RedirectAdminMiddleware;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ])->alias([
                     'locale' => LocaleMiddleware::class,
+                    'admin' => AdminMiddleware::class,
+                    'redirectAdmin' => RedirectAdminMiddleware::class
                 ]);
 
         //
