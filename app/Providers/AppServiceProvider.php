@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //Vite::prefetch(concurrency: 3);
         // dd(LanguageEnum::toArray());
+
         Inertia::share([
             'getLocale' => app()->getLocale(),
             'isLogged' => fn() => auth()->user() ? true : false,

@@ -1,9 +1,17 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { useSidebarStore } from '@/stores/toggleSidebar';
+import { Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const logout = ()=>{
     const form = useForm({});
     form.post(route('admin.logout'));
+}
+
+const sidebarStore = useSidebarStore();
+
+const toggleSidebar = ()=>{
+    sidebarStore.toggleDrawer()
 }
 </script>
 <template>
@@ -12,11 +20,9 @@ const logout = ()=>{
       <div class="flex flex-wrap justify-between items-center">
         <div class="flex justify-start items-center">
           <button
-            data-drawer-target="drawer-navigation"
-            data-drawer-toggle="drawer-navigation"
-            aria-controls="drawer-navigation"
             class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
+            @click="toggleSidebar"
+            >
             <svg
               aria-hidden="true"
               class="w-6 h-6"
@@ -45,14 +51,9 @@ const logout = ()=>{
             </svg>
             <span class="sr-only">Toggle sidebar</span>
           </button>
-          <a href="https://flowbite.com" class="flex items-center justify-between mr-4">
-            <img
-              src="https://flowbite.s3.amazonaws.com/logo.svg"
-              class="mr-3 h-8"
-              alt="Flowbite Logo"
-            />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-          </a>
+          <Link :href="route('admin.dashboard')" class="flex items-center justify-between me-4">
+                <img src="/storage/logo.png" class=" w-24 rounded-full" alt="">
+            </Link>
           <form action="#" method="GET" class="hidden md:block md:pl-2">
             <label for="topbar-search" class="sr-only">Search</label>
             <div class="relative md:w-64 lg:w-96">
@@ -85,8 +86,6 @@ const logout = ()=>{
         <div class="flex items-center lg:order-2">
           <button
             type="button"
-            data-drawer-toggle="drawer-navigation"
-            aria-controls="drawer-navigation"
             class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
             <span class="sr-only">Toggle search</span>

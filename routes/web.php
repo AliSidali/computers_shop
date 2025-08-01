@@ -10,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\ProductController;
 
 Route::get('/language/{lang}', [LanguageController::class, 'changeLocale'])->name('language');
 
@@ -38,10 +39,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'redirectAdmin'], function ()
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+Route::prefix('admin')->middleware(['admin', 'locale'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
+    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
 });
 
 

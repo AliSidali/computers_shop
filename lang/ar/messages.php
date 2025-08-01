@@ -10,6 +10,23 @@ return [
     'register' => 'انشاء حساب',
 
     //navbar
-    'language' => 'اللغة'
+    'language' => 'اللغة',
+
+    //sidebar
+    'dashboard' => 'لوحة التحكم',
+    'products' => 'المنتجات',
+    'categories' => 'الفئات',
+    'brands' => 'العلامات',
+    'pages' => 'الصفحات',
+
+    //product list
+    'no_product' => 'قائمة المنتجات فارغة',
+    'product_name' => 'اسم المنتج',
+    'inStock' => 'متوفر',
+    'publish' => 'نشر',
+    'quantity' => 'الكمية',
+    'price' => 'السعر'
+
+
 
 ];

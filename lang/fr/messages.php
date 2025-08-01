@@ -13,4 +13,21 @@ return [
     'language' => 'langue',
 
 
+    //sidebar
+    'dashboard' => 'dashboard',
+    'products' => 'produits',
+    'categories' => 'catégories',
+    'brands' => 'marques',
+    'pages' => 'pages',
+
+    //product list
+    'no_product' => 'la liste des produits est vide',
+    'product_name' => 'nom du produit',
+    'inStock' => 'en stock',
+    'publish' => 'publier',
+    'quantity' => 'quantité',
+    'price' => 'prix'
+
+
+
 ];
