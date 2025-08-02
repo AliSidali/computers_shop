@@ -1,6 +1,8 @@
 <?php
 
 return [
+    //GLOBAL
+    'search' => 'rechercher',
     //LOGIN PAGE TRANSLATIONS
     'login' => 'se connecter',
     'email' => 'e-mail',
@@ -26,7 +28,11 @@ return [
     'inStock' => 'en stock',
     'publish' => 'publier',
     'quantity' => 'quantité',
-    'price' => 'prix'
+    'price' => 'prix',
+    'add_product' => 'ajouter un produit',
+    'actions' => 'actions',
+    'filter' => 'filtrer',
+
 
 
 

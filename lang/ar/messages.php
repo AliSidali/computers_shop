@@ -1,6 +1,8 @@
 <?php
 
 return [
+    //GLOBAL
+    'search' => 'البحث',
     //LOGIN PAGE TRANSLATIONS
     'login' => 'تسجيل الدخول',
     'email' => 'البريد الاكتروني',
@@ -25,7 +27,12 @@ return [
     'inStock' => 'متوفر',
     'publish' => 'نشر',
     'quantity' => 'الكمية',
-    'price' => 'السعر'
+    'price' => 'السعر',
+    'add_product' => 'إضافة منتج',
+    'actions' => 'إجراءات',
+    'filter' => 'filtrer',
+
+
 
 
 

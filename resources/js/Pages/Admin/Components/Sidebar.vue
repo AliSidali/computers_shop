@@ -19,7 +19,7 @@ const sidebarStore = useSidebarStore();
 </script>
 <template>
     <aside
-      class="fixed  top-0 start-0 z-40 w-64 h-screen pt-28 transition-transform  bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-700"
+      class="fixed  top-0 start-0 z-10 w-64 h-screen pt-28 transition-transform  bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-700"
      :class="{
         'translate-x-full md:-translate-x-0': direction === 'rtl',
         '-translate-x-full md:translate-x-0': direction === 'ltr',
