@@ -36,5 +36,5 @@ return [
         'name' => 'nom',
         // Map your field names to user-friendly labels
     ],
-
+    'exists' => 'La valeur sélectionnée  n\'existe pas.',
 ];

@@ -7,7 +7,8 @@ import AdminLayout from './Layouts/AdminLayout.vue';
 const props = defineProps({
     products:Object,
     categories:Array,
-    brands:Array
+    brands:Array,
+    success:String
 })
 
 const isProductModalOpen = ref(false);
@@ -23,6 +24,6 @@ const openProductModal = ()=>{
 <template>
     <AdminLayout>
         <ProductList :products="products" @onProductModalOpen="openProductModal" />
-        <ProductModal v-model="isProductModalOpen"  :categories="categories" :brands="brands" />
+        <ProductModal v-model="isProductModalOpen"  :categories="categories" :brands="brands" :success="success"/>
     </AdminLayout>
 </template>

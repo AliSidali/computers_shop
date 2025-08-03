@@ -21,7 +21,9 @@ class ProductResource extends JsonResource
             'quantity' => $this->quantity,
             'price' => $this->price,
             'inStock' => $this->inStock,
-            'published' => $this->published
+            'published' => $this->published,
+            "created_at" => $this->convertTimestampToDate()
+
         ];
     }
 }

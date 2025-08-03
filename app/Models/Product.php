@@ -5,10 +5,12 @@ namespace App\Models;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ModelMethods;
 
 class Product extends Model
 {
     use HasSlug;
+    use ModelMethods;
 
     protected $fillable = [
         'title',

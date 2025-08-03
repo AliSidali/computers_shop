@@ -1,6 +1,6 @@
 <script setup>
 import { usePage } from '@inertiajs/vue3';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import axiosClient from '@/axiosClient';
 
 const props = defineProps({
@@ -17,6 +17,7 @@ const products = reactive({
     nextLink:props.products?.links.next
 })
 const isLoading = ref(false);
+
 
 
 const products_exist = computed(()=>{
@@ -150,6 +151,7 @@ const openProductModal = ()=>{
                                 <th scope="col" class="px-4 py-3">{{ translations.price }}</th>
                                 <th scope="col" class="px-4 py-3">{{ translations.inStock }}</th>
                                 <th scope="col" class="px-4 py-3">{{ translations.publish }}</th>
+                                <th scope="col" class="px-4 py-3">created_at</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -164,6 +166,7 @@ const openProductModal = ()=>{
                                 <td class="px-4 py-3">${{ product.price }}</td>
                                 <td class="px-4 py-3">{{ product.inStock }}</td>
                                 <td class="px-4 py-3">{{ product.published }}</td>
+                                <td class="px-4 py-3">{{ product.created_at }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end">
                                     <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
