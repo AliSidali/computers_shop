@@ -30,7 +30,8 @@ return [
     'price' => 'السعر',
     'add_product' => 'إضافة منتج',
     'actions' => 'إجراءات',
-    'filter' => 'filtrer',
+    'filter' => 'التصفية',
+    'created_at' => 'الوقت'
 
 
 

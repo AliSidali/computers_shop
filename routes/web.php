@@ -46,6 +46,7 @@ Route::prefix('admin')->middleware(['admin', 'locale'])->group(function () {
 
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
     Route::post('/product', [ProductController::class, 'store'])->name('admin.product.store');
+    Route::patch('/product/{product}', [ProductController::class, 'update'])->name('admin.product.update');
 });
 
 

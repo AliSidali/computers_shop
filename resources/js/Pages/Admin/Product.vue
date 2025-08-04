@@ -12,9 +12,10 @@ const props = defineProps({
 })
 
 const isProductModalOpen = ref(false);
+const editedProduct = ref(null);
 
-const openProductModal = ()=>{
-
+const openProductModal = (product)=>{
+    editedProduct.value = product;
     isProductModalOpen.value = true;
 }
 
@@ -24,6 +25,6 @@ const openProductModal = ()=>{
 <template>
     <AdminLayout>
         <ProductList :products="products" @onProductModalOpen="openProductModal" />
-        <ProductModal v-model="isProductModalOpen"  :categories="categories" :brands="brands" :success="success"/>
+        <ProductModal v-model="isProductModalOpen"  :categories="categories" :brands="brands" :success="success" :product="editedProduct"/>
     </AdminLayout>
 </template>

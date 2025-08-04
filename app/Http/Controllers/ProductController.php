@@ -37,8 +37,19 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['description'] = nl2br($data['description']);
-        // Product::create($data);
-
+        Product::create($data);
         return back()->with('success', 'product created successfully');
+    }
+
+    public function update(ProductRequest $request, Product $product)
+    {
+        $data = $request->validated();
+        $product->fill($data);
+        if ($product->isDirty()) {
+            $product->save();
+             return back()->with('success', 'product updated successfully');
+        }
+        return back();
+
     }
 }

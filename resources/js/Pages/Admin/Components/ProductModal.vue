@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -10,12 +10,14 @@ import {
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import {  ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { useForm, usePage } from '@inertiajs/vue3'
+
 import { Toast } from '@/helpers';
 const props = defineProps({
     modelValue:Boolean,
     categories:Array,
     brands:Array,
-    success:String
+    success:String,
+    product:Object
 })
 
 const page = usePage().props;
@@ -25,39 +27,67 @@ const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
-const form = useForm({
-        title:'',
-        category_id:"",
-        brand_id:"",
-        quantity:0,
-        price:0,
-        quantity:null,
-        description:'',
-});
 
 watch(()=>props.modelValue, ()=>{
     isOpen.value = props.modelValue
 })
 
+
+const form = useForm({
+   title :  "",
+    category_id : "",
+    brand_id : "",
+    quantity : 0,
+    price : 0,
+    description : "",
+});
+
+watch(()=>props.product, (newProduct)=>{
+     form.title = newProduct?.title??"" ;
+     form.category_id = newProduct?.category_id??"";
+     form.brand_id = newProduct?.brand_id??"";
+     form.quantity = newProduct?.quantity??0;
+     form.price = newProduct?.price??0;
+     form.description = newProduct?.description;
+})
+
+
+
+
+
+
 function closeModal() {
   isOpen.value = false
   form.errors = [];
-  form.reset();
   emit('update:modelValue', isOpen.value)
 }
 
 function submit(){
 
-    form.post(route('admin.product.store'), {
-        onSuccess:()=>{
-            Toast.fire({
-            icon: "success",
-            title: props.success
-            });
-            closeModal();
-            window.location.reload();
-        }
-    })
+    if(!props.product?.id){
+        form.post(route('admin.product.store'), {
+            onSuccess:()=>{
+                Toast.fire({
+                icon: "success",
+                title: props.success
+                });
+                closeModal();
+            }
+        })
+    }else{
+        form.patch(route('admin.product.update', props.product.id), {
+            onSuccess:()=>{
+
+
+                Toast.fire({
+                icon: "success",
+                title: props.success
+                });
+                closeModal();
+            }
+        })
+    }
+
 }
 </script>
 
@@ -101,12 +131,11 @@ function submit(){
                     <XMarkIcon @click="closeModal" class="w-7 rounded-full p-1 cursor-pointer hover:bg-gray-100" />
               </DialogTitle>
               <!-- Modal toggle -->
-
             <form  @submit.prevent="submit">
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" v-model="form.title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" >
+                        <input type="text" v-model="form.title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  >
                         <div v-if="form.errors.title " class="flex text-red-700 gap-2">
                             <ExclamationTriangleIcon class="w-5" />
                             <span>{{ form.errors.title }}</span>
@@ -115,8 +144,8 @@ function submit(){
                     <div>
                         <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                         <select  v-model="form.category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-                            <option value=""  selected disabled>Select category</option>
-                            <option v-for="(category, index) in categories" :key="index" :value="category.id">{{ category.name }}</option>
+                            <option  value=""  selected disabled>Select category</option>
+                            <option v-for="(category, index) in categories" :key="index" :value="category.id" >{{ category.name }}{{ form.category_id }}</option>
                         </select>
                           <div v-if="form.errors.category_id " class="flex text-red-700 gap-2">
                               <ExclamationTriangleIcon class="w-5" />
@@ -136,16 +165,15 @@ function submit(){
                     </div>
                     <div>
                         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
-                        <input type="number" v-model="form.quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="0" >
+                        <input type="number"   v-model="form.quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  >
                          <div v-if="form.errors.quantity " class="flex text-red-700 gap-2">
                               <ExclamationTriangleIcon class="w-5" />
                             <span>{{ form.errors.quantity }}</span>
                         </div>
                     </div>
                     <div>
-                        {{ form.price }}
                         <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input type="number" step="0.01" v-model="form.price" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$0" >
+                        <input type="number" step="0.01" v-model="form.price"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  >
                         <div v-if="form.errors.price " class="flex text-red-700 gap-2">
                             <ExclamationTriangleIcon class="w-5" />
                             <span>{{ form.errors.price }}</span>

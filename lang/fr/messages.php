@@ -32,6 +32,7 @@ return [
     'add_product' => 'ajouter un produit',
     'actions' => 'actions',
     'filter' => 'filtrer',
+    'created_at' => 'temps'
 
 
 
