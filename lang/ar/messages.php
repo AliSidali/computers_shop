@@ -31,7 +31,21 @@ return [
     'add_product' => 'إضافة منتج',
     'actions' => 'إجراءات',
     'filter' => 'التصفية',
-    'created_at' => 'الوقت'
+    'created_at' => 'الوقت',
+
+    //product modal
+    'update_product' => 'تعديل المنتج',
+    'category' => 'الفئة',
+    'brand' => 'العلامة',
+    'description' => 'الوصف',
+    //times
+    'seconds' => 'ثانية',
+    'mins' => 'دقيقة',
+    'hours' => 'ساعة',
+    'days' => 'يوم',
+    'weeks' => 'اسبوع',
+    'months' => 'شهر',
+    'years' => 'سنة',
 
 
 

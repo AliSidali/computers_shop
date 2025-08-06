@@ -4,8 +4,8 @@ namespace App\Http\Enums;
 
 enum LanguageEnum: string
 {
-    case fr = 'francais';
     case ar = 'العربية';
+    case fr = 'francais';
 
     public static function toArray()
     {

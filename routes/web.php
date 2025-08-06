@@ -20,7 +20,7 @@ Route::middleware('locale')->group(function () {
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register')
         ]);
-    });
+    })->name('welcome');
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');

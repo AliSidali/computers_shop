@@ -1,10 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import { useUserStore } from '@/stores/toggleSidebar';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeroSection from '@/Components/MyComponents/HeroSection.vue';
 
 
-const user = useUserStore();
 defineProps({
     canLogin: {
         type: Boolean,
@@ -21,6 +20,6 @@ defineProps({
 <template>
     <Head title="Welcome" />
     <AuthenticatedLayout>
-
+        <HeroSection />
     </AuthenticatedLayout>
 </template>

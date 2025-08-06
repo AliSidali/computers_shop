@@ -32,7 +32,23 @@ return [
     'add_product' => 'ajouter un produit',
     'actions' => 'actions',
     'filter' => 'filtrer',
-    'created_at' => 'temps'
+    'created_at' => 'temps',
+
+    //product modal
+    'update_product' => 'modifier le produit',
+    'category' => 'catégorie',
+    'brand' => 'marque',
+    'description' => 'description',
+
+    //times
+    'seconds' => 'seconds',
+    'mins' => 'minutes',
+    'hours' => 'heurs',
+    'days' => 'jours',
+    'weeks' => 'semaines',
+    'months' => 'mois',
+    'years' => 'ans',
+
 
 
 

@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share([
             'getLocale' => app()->getLocale(),
             'isLogged' => fn() => auth()->user() ? true : false,
-            'languages' => fn() => LanguageEnum::toArray(),
             'translations' => function () {
                 $language_path = resource_path('../lang/' . app()->getLocale());
                 $files = File::files($language_path);
