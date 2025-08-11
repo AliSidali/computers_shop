@@ -28,7 +28,7 @@ class ProductController extends Controller
         return Inertia::render('Admin/Product', [
             'products' => ProductResource::collection($products),
             'categories' => $categories,
-            'brands' => $brands,
+            'brands' => Product::all(),//$brands,
             'success' => session()->get('success')
         ]);
     }
@@ -47,9 +47,17 @@ class ProductController extends Controller
         $product->fill($data);
         if ($product->isDirty()) {
             $product->save();
-             return back()->with('success', 'product updated successfully');
+            return back()->with('success', 'product updated successfully');
         }
         return back();
 
+    }
+
+    public function refresh(Request $request)
+    {
+        $products = Product::query()->where('category_id', $request->id)->get();
+        return response()->json([
+            'brands' => $products
+        ]);
     }
 }

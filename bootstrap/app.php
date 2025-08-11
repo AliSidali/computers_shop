@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\RedirectAdminMiddleware;
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\RedirectAdminMiddleware;
+use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,7 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ])->alias([
                     'locale' => LocaleMiddleware::class,
                     'admin' => AdminMiddleware::class,
-                    'redirectAdmin' => RedirectAdminMiddleware::class
+                    'redirectAdmin' => RedirectAdminMiddleware::class,
+                    'role' => RoleMiddleware::class,
+                    'permission' => PermissionMiddleware::class,
+                    'role_or_permission' => RoleOrPermissionMiddleware::class,
+
                 ]);
 
         //

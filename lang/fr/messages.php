@@ -16,7 +16,7 @@ return [
 
 
     //sidebar
-    'dashboard' => 'dashboard',
+    'dashboard' => 'tableau de board',
     'products' => 'produits',
     'categories' => 'catégories',
     'brands' => 'marques',

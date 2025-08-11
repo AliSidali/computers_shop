@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Spatie\Permission\Middleware\RoleMiddleware;
+
 
 class AdminMiddleware
 {
@@ -16,9 +18,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && auth()->user()->isAdmin) {
+        if ($request->is('admin/login') || $request->is('admin/register')) {
             return $next($request);
         }
-        return redirect()->route('admin.login');
+        return app(RoleMiddleware::class)->handle($request, $next, 'Admin|Vendor');
     }
 }

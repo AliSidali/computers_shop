@@ -13,8 +13,7 @@ import {ChevronDownIcon} from '@heroicons/vue/24/solid';
 const showingNavigationDropdown = ref(false);
 const page = usePage();
 
-const isLogged = page.props.isLogged;
-const getLocale = page.props.getLocale;
+const {user} = page.props.auth;
 const translations = page.props.translations;
 
 
@@ -83,7 +82,7 @@ const showLanguages = ref(false);
 
                                     </template>
                                 </Dropdown>
-                                <template v-if="isLogged">
+                                <template v-if="user">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
                                             <span class="flex items-center rounded-md">

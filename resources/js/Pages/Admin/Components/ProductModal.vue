@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -10,6 +10,7 @@ import {
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 import {  ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { useForm, usePage } from '@inertiajs/vue3'
+import axiosClient from '@/axiosClient';
 
 import { Toast } from '@/helpers';
 const props = defineProps({
@@ -27,6 +28,9 @@ const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
+const localData = reactive({
+    brands: [...props.brands]
+})
 
 watch(()=>props.modelValue, ()=>{
     isOpen.value = props.modelValue
@@ -89,6 +93,19 @@ function submit(){
     }
 
 }
+
+const send = (type, id)=>{
+    console.log("hi");
+
+    axiosClient.post(route('admin.product.refresh'), {
+        'id': id,
+        'type': type,
+
+    }).then(({data})=>{
+    localData.brands = [...data.brands];
+
+    })
+}
 </script>
 
 <template>
@@ -131,7 +148,7 @@ function submit(){
                     <XMarkIcon @click="closeModal" class="w-7 rounded-full p-1 cursor-pointer hover:bg-gray-100" />
               </DialogTitle>
               <!-- Modal toggle -->
-            <form  @submit.prevent="submit">
+            <form   @submit.prevent="submit">
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
                         <label for="name" class="block text-start uppercase mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ translations.product_name }}</label>
@@ -143,8 +160,8 @@ function submit(){
                     </div>
                     <div class="relative">
                         <label for="category" class="block text-start uppercase mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ translations.category }}</label>
-                        <select  v-model="form.category_id" class="bg-gray-50 bg-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-                            <option v-for="(category, index) in categories" :key="index" :value="category.id" >{{ category.name }}</option>
+                        <select  v-model="form.category_id" @change="send('category', form.category_id)"  class="bg-gray-50 bg-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <option  v-for="(category, index) in categories" :key="index"   :value="category.id" >{{ category.name }}</option>
                         </select>
                         <ChevronDownIcon class="absolute end-3 top-10  w-5 " />
                           <div v-if="form.errors.category_id " class="flex text-red-700 gap-2">
@@ -155,7 +172,7 @@ function submit(){
                     <div class="relative sm:col-span-2">
                         <label for="brand" class="block text-start uppercase mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ translations.brand }}</label>
                         <select v-model="form.brand_id" class=" bg-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option v-for="(brand, index) in brands" :key="index" :value="brand.id">{{ brand.name }}</option>
+                            <option v-for="(brand, index) in localData.brands" :key="index" :value="brand.id">{{ brand.title }}</option>
                         </select>
                         <ChevronDownIcon class="absolute end-3 top-10  w-5 " />
                         <div v-if="form.errors.brand_id " class="flex text-red-700 gap-2">

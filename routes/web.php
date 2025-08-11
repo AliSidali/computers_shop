@@ -22,9 +22,9 @@ Route::middleware('locale')->group(function () {
         ]);
     })->name('welcome');
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,21 +33,23 @@ Route::middleware('locale')->group(function () {
     });
 });
 
-// ADMIN ROUTES
-Route::group(['prefix' => 'admin', 'middleware' => 'redirectAdmin'], function () {
-    Route::get('/login', [AdminAuthController::class, 'index'])->name('admin.login.index');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
-});
+// MY ADMIN PAGES ROUTES ROUTES BEFORE FILAMENT
+// Route::group(['prefix' => 'admin', 'middleware' => 'redirectAdmin'], function () {
+//     Route::get('/login', [AdminAuthController::class, 'index'])->name('admin.login.index');
+//     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+// });
 
-Route::prefix('admin')->middleware(['admin', 'locale'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+// Route::prefix('admin')->middleware(['admin', 'locale'])->group(function () {
+//     Route::get('/form', [AdminController::class, 'index'])->name('admin.dashboard');
+
+//     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 
-    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::post('/product', [ProductController::class, 'store'])->name('admin.product.store');
-    Route::patch('/product/{product}', [ProductController::class, 'update'])->name('admin.product.update');
-});
+//     Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+//     Route::post('/product/refresh', [ProductController::class, 'refresh'])->name('admin.product.refresh');
+//     Route::post('/product', [ProductController::class, 'store'])->name('admin.product.store');
+//     Route::patch('/product/{product}', [ProductController::class, 'update'])->name('admin.product.update');
+// });
 
 
 require __DIR__ . '/auth.php';
