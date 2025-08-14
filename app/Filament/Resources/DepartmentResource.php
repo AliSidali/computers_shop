@@ -3,13 +3,13 @@
 namespace App\Filament\Resources;
 
 
-use App\Http\Enums\RolesEnum;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use App\Models\Department;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use App\Enums\RolesEnum;
 use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Checkbox;
@@ -26,7 +26,6 @@ class DepartmentResource extends Resource
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -82,7 +81,7 @@ class DepartmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CategoriesRelationManager::class,
         ];
     }
 
@@ -99,5 +98,10 @@ class DepartmentResource extends Resource
     {
         $user = auth()->user();
         return $user->hasRole(RolesEnum::Admin->value);
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('messages.departments');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Enums\LanguageEnum;
+use App\Enums\LanguageEnum;
 use File;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;

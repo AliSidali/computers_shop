@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Enums\LanguageEnum;
+use App\Enums\LanguageEnum;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

@@ -47,6 +47,12 @@ return [
     'months' => 'شهر',
     'years' => 'سنة',
 
+    //filament
+    'departments' => 'الأقسام',
+    'draft' => 'مسودة',
+    'published' => 'نشر'
+
+
 
 
 

@@ -11,4 +11,9 @@ class Category extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
 }

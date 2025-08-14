@@ -6,7 +6,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
-use App\Http\Enums\RolesEnum;
+use App\Enums\RolesEnum;
 use Filament\Support\Colors\Color;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Middleware\LocaleMiddleware;

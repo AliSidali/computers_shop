@@ -49,8 +49,10 @@ return [
     'months' => 'mois',
     'years' => 'ans',
 
-
-
+    //filament
+    'departments' => 'Departments',
+    'draft' => 'brouillon',
+    'published' => 'publié'
 
 
 
